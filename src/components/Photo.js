@@ -13,7 +13,7 @@ const Picture = () => {
     function getPhoto() {
       axios
         .get(
-          "https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY&date=${newDate}"
+          `https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY&date=${newDate}`
         )
         .then(response => {
           console.log(response.data);
@@ -26,7 +26,7 @@ const Picture = () => {
         .catch(error => console.log(error));
     }
     getPhoto();
-  }, []);
+  }, [newDate]);
 
   return (
     <div>
