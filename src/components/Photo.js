@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import styled from "styled-components";
 import axios from "axios";
 
 const Picture = () => {
@@ -8,6 +9,40 @@ const Picture = () => {
   const [explanation, setExplanation] = useState("");
 
   const [newDate, setNewDate] = useState("");
+
+  const DateButton = styled.button`
+    border: none;
+    background-color: #02030f;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    font-family: "Space Mono", monospace;
+    margin: 0 auto;
+    font-size: 16px;
+
+    &:hover {
+      cursor: pointer;
+      text-decoration: underline;
+    }
+  `;
+
+  const Image = styled.img`
+    max-height: 500px;
+    border: 3px solid white;
+  `;
+
+  const Dropdown = styled.div`
+    position: relative;
+    display: inline-block;
+  `;
+
+  const DropdownContent = styled.div`
+    display: none;
+    background-color: #02030f;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    color: white;
+  `;
 
   useEffect(() => {
     function getPhoto() {
@@ -31,22 +66,24 @@ const Picture = () => {
   return (
     <div>
       <h2>{title}</h2>
-      <div className="dropdown">
+      <Dropdown className="dropdown">
         <p>
           {date} <i className="fas fa-angle-down"></i>
         </p>
-        <div className="dropdown-content">
-          <button onClick={() => setNewDate("2018-10-09")}>One Year Ago</button>
-          <button onClick={() => setNewDate("2014-10-09")}>
+        <DropdownContent className="dropdown-content">
+          <DateButton onClick={() => setNewDate("2018-10-09")}>
+            One Year Ago
+          </DateButton>
+          <DateButton onClick={() => setNewDate("2014-10-09")}>
             Five Years Ago
-          </button>
-          <button onClick={() => setNewDate("2009-10-09")}>
+          </DateButton>
+          <DateButton onClick={() => setNewDate("2009-10-09")}>
             Ten Years Ago
-          </button>
-        </div>
-      </div>
+          </DateButton>
+        </DropdownContent>
+      </Dropdown>
       <p>{explanation}</p>
-      <img src={picture} alt="Nasa astronomy pic of the day" />
+      <Image src={picture} alt="Nasa astronomy pic of the day" />
     </div>
   );
 };
